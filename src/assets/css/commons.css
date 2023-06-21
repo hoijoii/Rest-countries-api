@@ -1,3 +1,15 @@
 .ml5 {
   margin-left: 5px;
 }
+
+.filter-design {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 13px;
+  border: none;
+  -webkit-box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+          box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  border-radius: 5px;
+}
+.filter-design:focus {
+  outline: none;
+}

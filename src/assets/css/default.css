@@ -9,12 +9,11 @@ html, body {
 
 #container {
   width: 67vw;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 
 /* ============================================================================= 
@@ -57,7 +56,7 @@ nav {
 }
 #navbar .title {
   font-weight: 800;
-  font-size: 15px;
+  font-size: 16px;
 }
 #navbar .mode {
   margin-left: auto;
@@ -77,3 +76,33 @@ nav {
                                     HomeView
 
 ============================================================================= */
+.home .filter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.home .filter .search-box {
+  position: relative;
+}
+.home .filter .search {
+  position: absolute;
+  padding: 11px 40px;
+  width: 25vw;
+}
+.home .filter .search:focus {
+  outline: none;
+}
+.home .filter ion-icon {
+  position: absolute;
+  font-size: 15px;
+  color: gray;
+  top: 13px;
+  left: 15px;
+}
+.home .filter .region {
+  margin-left: auto;
+}
+.home .filter .region .slct {
+  padding: 11px;
+  width: 15vw;
+}

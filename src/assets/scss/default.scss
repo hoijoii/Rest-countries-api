@@ -9,8 +9,10 @@ html, body {
 
 #container {
   width: 67vw;
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%)
 }
 
 
@@ -46,7 +48,7 @@ nav {
 
   .title {
     font-weight: 800;
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .mode {
@@ -67,6 +69,45 @@ nav {
 ============================================================================= */
 
 .home {
-  
+
+  .filter {
+    display: flex;
+
+    .search-box {
+      position: relative; 
+    }
+
+    .search {
+      position: absolute;
+      padding: 11px 40px;
+      width: 25vw;
+      
+      &:focus {
+        outline: none;
+      }
+    }
+
+    ion-icon {
+      position: absolute;
+      font-size: 15px;
+      color: gray;
+      top: 13px;
+      left: 15px;
+    }
+
+    .region {
+      margin-left: auto;
+
+      .slct {
+        padding: 11px;
+        width: 15vw;
+
+        option {
+          
+        }
+      }
+    }
+    
+  }
 }
 

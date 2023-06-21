@@ -3,3 +3,16 @@
 .ml5 {
   margin-left: 5px;
 }
+
+//commons
+.filter-design {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px;
+  border: none;
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  border-radius: 5px;
+
+  &:focus {
+    outline: none;
+  }
+}
