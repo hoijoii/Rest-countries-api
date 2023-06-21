@@ -44,6 +44,9 @@ nav {
       -ms-flex-pack: center;
           justify-content: center;
 }
+#navbar .container {
+  width: 67vw;
+}
 #navbar .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
