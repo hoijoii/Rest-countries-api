@@ -1,6 +1,6 @@
 <template>
   <div id="navbar">
-    <div id="container">
+    <div class="container">
       <div class="wrapper">
         <div class="title">Where in the world?</div>
         <div class="mode" @click="setMode">
