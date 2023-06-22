@@ -6,7 +6,7 @@
           <input type="text" class="search filter-design" placeholder="Search for a country..."/>
           <ion-icon name="search" />
         </div>
-        <div class="region">
+        <div class="region" ref="select">
           <!-- custom select box -->
           <div class="slct filter-design" @click="selectToggle">
             {{region ? region : 'Filter by Region'}}
@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 /* eslint-disable */
-import { onMounted, reactive, Ref, ref } from 'vue';
+import { onMounted, onUnmounted, reactive, Ref, ref } from 'vue';
 
 // filter by region
 const region : Ref<string> = ref('')
@@ -46,14 +46,30 @@ const isSelectOpened: Ref<boolean> = ref(false)
 const selectToggle = ():void => {
   isSelectOpened.value = !isSelectOpened.value
 }
+
 const setSelectOpen = (re:string):void => {
   region.value = re
   isSelectOpened.value = false
 }
 
+// click outside of select area -> close
+const select: Ref<any> = ref(null)
+const documentClick = (e:any):void => {
+  let el = select.value
+  let target = e.target
+  if (el !== target && !el.contains(target)) {
+    isSelectOpened.value = false
+  }
+}
+
 // lifecycle
 onMounted(()=>{
   setRegions()
+  document.addEventListener('click', documentClick)
+})
+
+onUnmounted(()=>{
+  document.removeEventListener('click', documentClick)
 })
 
 </script>
