@@ -84,6 +84,13 @@ nav {
 .home .filter .search-box {
   position: relative;
 }
+.home .filter .search-box ion-icon {
+  position: absolute;
+  font-size: 15px;
+  color: gray;
+  top: 13px;
+  left: 15px;
+}
 .home .filter .search {
   position: absolute;
   padding: 11px 40px;
@@ -92,17 +99,48 @@ nav {
 .home .filter .search:focus {
   outline: none;
 }
-.home .filter ion-icon {
-  position: absolute;
-  font-size: 15px;
-  color: gray;
-  top: 13px;
-  left: 15px;
-}
 .home .filter .region {
   margin-left: auto;
+  font-weight: 600;
+  width: 13vw;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 .home .filter .region .slct {
-  padding: 11px;
-  width: 15vw;
+  background-color: white;
+  padding: 11px 19px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.home .filter .region .slct ion-icon {
+  margin-left: auto;
+}
+.home .filter .region ul, .home .filter .region li {
+  list-style: none;
+  font-size: 13px;
+  margin: 0;
+}
+.home .filter .region ul {
+  background-color: white;
+  position: absolute;
+  width: 13vw;
+  padding: 0;
+  margin-top: 10px;
+  -webkit-box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+          box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  border-radius: 5px;
+}
+.home .filter .region li {
+  padding: 8px 20px;
+  cursor: pointer;
+}
+.home .filter .region li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }

@@ -7,10 +7,15 @@
           <ion-icon name="search" />
         </div>
         <div class="region">
-          <select v-model="region" required class="slct filter-design">
-            <option value="" hidden selected>Filter by Region</option>
-            <option v-for="(re, idx) in regions" :key="idx" :value="re">{{ re }}</option>
-          </select>
+          <!-- custom select box -->
+          <div class="slct filter-design" @click="selectToggle">
+            {{region ? region : 'Filter by Region'}}
+            <ion-icon name="caret-down" v-if="!isSelectOpened"/>
+            <ion-icon name="caret-up" v-else-if="isSelectOpened"/>
+          </div>
+          <ul v-if="isSelectOpened">
+            <li v-for="(re, idx) in regions" :key="idx" @click="setSelectOpen(re)">{{ re }}</li>
+          </ul>
         </div>
       </div>
       
@@ -22,11 +27,10 @@
 /* eslint-disable */
 import { onMounted, reactive, Ref, ref } from 'vue';
 
-const region : Ref<string> = ref('')
-
 // filter by region
+const region : Ref<string> = ref('')
 const data = require('@/assets/data/data.json')
-const regions : Array<string> = reactive(['Filter by Region'])
+const regions : Array<string> = reactive([])
 
 const setRegions = ():void => {
   data.forEach((country:any) => {
@@ -35,6 +39,16 @@ const setRegions = ():void => {
     }
   });
   regions.sort()
+}
+
+// select box toggle
+const isSelectOpened: Ref<boolean> = ref(false)
+const selectToggle = ():void => {
+  isSelectOpened.value = !isSelectOpened.value
+}
+const setSelectOpen = (re:string):void => {
+  region.value = re
+  isSelectOpened.value = false
 }
 
 // lifecycle
