@@ -108,7 +108,7 @@ nav {
 .home .filter .region {
   margin-left: auto;
   font-weight: 600;
-  width: 13vw;
+  width: 165px;
   -ms-user-select: none;
   -moz-user-select: -moz-none;
   -webkit-user-select: none;
@@ -131,7 +131,7 @@ nav {
 .home .filter .region ul {
   background-color: white;
   position: absolute;
-  width: 13vw;
+  width: 165px;
   margin-top: 10px;
   -webkit-box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
           box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
