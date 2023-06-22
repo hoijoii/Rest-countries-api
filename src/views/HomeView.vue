@@ -20,8 +20,14 @@
       </div>
 
       <div class="list">
-        <div>
-
+        <div v-for="country in data" :key="country.name">
+          <country-card 
+            :flag="country.flag"
+            :name="country.name"
+            :capital="country.capital"
+            :region="country.region"
+            :population="country.population"
+          />
         </div>
       </div>
       
@@ -32,13 +38,13 @@
 <script lang="ts" setup>
 /* eslint-disable */
 import { onMounted, onUnmounted, reactive, Ref, ref } from 'vue';
+import CountryCard from '@/components/CountryCard.vue';
 
 const data = require('@/assets/data/data.json')
 
 // filter by region
 const region : Ref<string> = ref('')
 const regions : Array<string> = reactive([])
-let countryList: Array<any> = reactive([])
 
 const setRegionSelectList = ():void => {
   data.forEach((country:any) => {
@@ -51,6 +57,8 @@ const setRegionSelectList = ():void => {
 
 // select box toggle
 const isSelectOpened: Ref<boolean> = ref(false)
+let countryList: Array<any> = reactive(data)
+
 const selectToggle = ():void => {
   isSelectOpened.value = !isSelectOpened.value
 }
@@ -81,7 +89,6 @@ const documentClick = (e:any):void => {
 // lifecycle
 onMounted(()=>{
   setRegionSelectList()
-  setCountryList()
   document.addEventListener('click', documentClick)
   console.log(countryList)
 })

@@ -1,3 +1,9 @@
+ul, li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 html, body {
   margin: 0;
   position: relative;
@@ -122,16 +128,10 @@ nav {
 .home .filter .region .slct ion-icon {
   margin-left: auto;
 }
-.home .filter .region ul, .home .filter .region li {
-  list-style: none;
-  font-size: 13px;
-  margin: 0;
-}
 .home .filter .region ul {
   background-color: white;
   position: absolute;
   width: 13vw;
-  padding: 0;
   margin-top: 10px;
   -webkit-box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
           box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
@@ -140,7 +140,45 @@ nav {
 .home .filter .region li {
   padding: 8px 20px;
   cursor: pointer;
+  font-size: 13px;
 }
 .home .filter .region li:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================================================= 
+
+                                    CountryCard
+
+============================================================================= */
+#card {
+  width: 200px;
+  height: 280px;
+  background-color: white;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 13px;
+  -webkit-box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+          box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  cursor: pointer;
+}
+#card img {
+  width: 200px;
+  height: 130px;
+  overflow: hidden;
+  border-radius: 5px 5px 0px 0px;
+}
+#card .title {
+  font-weight: 800;
+  font-size: 15px;
+}
+#card .info {
+  padding: 20px;
+}
+#card .info .description {
+  margin-top: 10px;
+}
+#card .info .description span {
+  font-weight: 600;
 }
