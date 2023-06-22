@@ -14,8 +14,14 @@
             <ion-icon name="caret-up" v-else-if="isSelectOpened"/>
           </div>
           <ul v-if="isSelectOpened">
-            <li v-for="(re, idx) in regions" :key="idx" @click="setSelectOpen(re)">{{ re }}</li>
+            <li v-for="(re, idx) in regions" :key="idx" @click="setRegion(re)">{{ re }}</li>
           </ul>
+        </div>
+      </div>
+
+      <div class="list">
+        <div>
+
         </div>
       </div>
       
@@ -27,12 +33,14 @@
 /* eslint-disable */
 import { onMounted, onUnmounted, reactive, Ref, ref } from 'vue';
 
+const data = require('@/assets/data/data.json')
+
 // filter by region
 const region : Ref<string> = ref('')
-const data = require('@/assets/data/data.json')
 const regions : Array<string> = reactive([])
+let countryList: Array<any> = reactive([])
 
-const setRegions = ():void => {
+const setRegionSelectList = ():void => {
   data.forEach((country:any) => {
     if(!regions.includes(country.region)) {
       regions.push(country.region)
@@ -47,9 +55,17 @@ const selectToggle = ():void => {
   isSelectOpened.value = !isSelectOpened.value
 }
 
-const setSelectOpen = (re:string):void => {
+const setRegion = (re:string):void => {
   region.value = re
   isSelectOpened.value = false
+  setCountryList(re)
+}
+
+
+const setCountryList = (region?:string):void => {
+  region ? 
+    countryList = data.filter((country:any) => country.region === region)
+    : countryList = data
 }
 
 // click outside of select area -> close
@@ -64,8 +80,10 @@ const documentClick = (e:any):void => {
 
 // lifecycle
 onMounted(()=>{
-  setRegions()
+  setRegionSelectList()
+  setCountryList()
   document.addEventListener('click', documentClick)
+  console.log(countryList)
 })
 
 onUnmounted(()=>{
