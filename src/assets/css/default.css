@@ -146,14 +146,25 @@ nav {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.list {
+  margin: 40px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
 /* ============================================================================= 
 
                                     CountryCard
 
 ============================================================================= */
 #card {
-  width: 200px;
-  height: 280px;
+  width: 220px;
+  height: 310px;
   background-color: white;
   border-radius: 5px;
   -webkit-box-sizing: border-box;
@@ -164,9 +175,10 @@ nav {
   cursor: pointer;
 }
 #card img {
-  width: 200px;
-  height: 130px;
-  overflow: hidden;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 220px;
+  height: 150px;
   border-radius: 5px 5px 0px 0px;
 }
 #card .title {

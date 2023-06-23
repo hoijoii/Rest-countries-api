@@ -2,14 +2,17 @@
   <div id="card">
     <img :src="flag" class="flag">
     <div class="info">
-      <div class="title">{{ name }}</div>
-      <div class="description">
-        <ul>
-          <li><span>Population: </span> {{ comma(population) }}</li>
-          <li><span>Region: </span>{{ region }}</li>
-          <li><span>Capital: </span>{{ capital }}</li>
-        </ul>
+      <div class="wrapper">
+        <div class="title">{{ name }}</div>
+        <div class="description">
+          <ul>
+            <li><span>Population: </span> {{ comma(population) }}</li>
+            <li><span>Region: </span>{{ region }}</li>
+            <li><span>Capital: </span>{{ capital }}</li>
+          </ul>
+        </div>
       </div>
+      
     </div>
   </div>
 </template>

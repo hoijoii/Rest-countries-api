@@ -20,13 +20,14 @@
       </div>
 
       <div class="list">
-        <div v-for="country in data" :key="country.name">
+        <div v-for="country in data" :key="country.name" class="card">
           <country-card 
             :flag="country.flag"
             :name="country.name"
             :capital="country.capital"
             :region="country.region"
             :population="country.population"
+            class=""
           />
         </div>
       </div>
