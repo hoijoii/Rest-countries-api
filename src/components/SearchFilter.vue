@@ -1,7 +1,7 @@
 <template>
   <div class="filter">
     <div class="search-box">
-      <input type="text" class="search filter-design" placeholder="Search for a country..."/>
+      <input type="text" v-model="searchKeyword" class="search filter-design" placeholder="Search for a country..."/>
       <ion-icon name="search" />
     </div>
     <div class="region" ref="select">
@@ -27,7 +27,7 @@ import { useCommonsStore } from '@/stores/commons'
 const commonsStore = useCommonsStore()
 
 // props & emits
-const emit = defineEmits([])
+const emit = defineEmits(['search'])
 
 // select box toggle
 const isSelectOpened: Ref<boolean> = ref(false)
@@ -35,6 +35,15 @@ const isSelectOpened: Ref<boolean> = ref(false)
 const selectToggle = ():void => {
   isSelectOpened.value = !isSelectOpened.value
 }
+
+// search
+const searchKeyword : Ref<string> = ref('')
+
+document.addEventListener('keyup', (e:any) => {
+  if (e.code === 'Enter') {
+    emit('search')
+  }
+})
 
 // filter by region
 const region : Ref<string> = ref('')
@@ -46,7 +55,7 @@ const setRegion = (re:string):void => {
 }
 
 defineExpose({
-  region
+  searchKeyword, region
 })
 
 // click outside of select area -> close
