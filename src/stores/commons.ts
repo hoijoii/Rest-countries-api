@@ -1,22 +1,21 @@
 /* eslint-disable */
 import { ref, Ref, reactive } from 'vue'
+import { getRestCountries } from '@/utils/rest-utils'
+import { defineStore } from 'pinia'
 
-export const useCommonsStore = () => {
-  const data = require('@/assets/data/data.json')
-  const regions : Array<string> = reactive([])
-
-  const setRegionSelectList = () : void => {
-    data.forEach((country: any) => {
-      if(!regions.includes(country.region)) {
-        regions.push(country.region)
-      }
-    });
-    regions.sort()
+export const useCommonsStore = defineStore('commonsStore', {
+  state: () => ({
+    data: require('@/assets/data/data.json'),
+    filterType: '' as string,
+    countryList: [] as Array<any>,
+  }),
+  actions: { 
+    getCountryItems(url?:string, params?:any) {
+      getRestCountries(url, params)
+        .then((res)=>{
+          this.countryList = res.data
+          this.filterType = 'search'
+        })      
+    },
   }
-
-  return { 
-    data,
-    regions,
-    setRegionSelectList
-  };
-}
+})

@@ -8,7 +8,7 @@
           <ul>
             <li><span>Population: </span> {{ comma(population) }}</li>
             <li><span>Region: </span>{{ region }}</li>
-            <li><span>Capital: </span>{{ capital }}</li>
+            <li v-if="capital"><span>Capital: </span>{{ capital }}</li>
           </ul>
         </div>
       </div>

@@ -12,7 +12,7 @@
         <ion-icon name="caret-up" v-else-if="isSelectOpened"/>
       </div>
       <ul v-if="isSelectOpened">
-        <li v-for="(re, idx) in commonsStore.regions" :key="idx" @click="setRegion(re)">{{ re }}</li>
+        <li v-for="(re, idx) in regions" :key="idx" @click="setRegionList(re)">{{ re }}</li>
       </ul>
     </div>
   </div>
@@ -41,17 +41,26 @@ const searchKeyword : Ref<string> = ref('')
 
 document.addEventListener('keyup', (e:any) => {
   if (e.code === 'Enter') {
-    emit('search')
+    commonsStore.getCountryItems('/name', searchKeyword.value)
   }
 })
 
 // filter by region
 const region : Ref<string> = ref('')
+const regions : Array<string> = reactive([])
 
-const setRegion = (re:string):void => {
+const setRegionList = (re:string):void => {
   region.value = re
   isSelectOpened.value = false
-  //setCountryList(re)
+}
+
+const setRegionSelectItems = () => {
+  commonsStore.countryList.forEach((country: any) => {
+    if (!regions.includes(country.region)) {
+      console.log('hey~')
+      regions.push(country.region)
+    }
+  })
 }
 
 defineExpose({
@@ -72,7 +81,7 @@ const documentClick = (e:any):void => {
 
 // lifeCycle
 onMounted(()=>{
-  commonsStore.setRegionSelectList()
+  setRegionSelectItems()
   document.addEventListener('click', documentClick)
 })
 
