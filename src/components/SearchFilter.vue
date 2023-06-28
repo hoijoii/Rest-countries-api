@@ -12,7 +12,7 @@
         <ion-icon name="caret-up" v-else-if="isSelectOpened"/>
       </div>
       <ul v-if="isSelectOpened">
-        <li v-for="(re, idx) in regions" :key="idx" @click="setRegionList(re)">{{ re }}</li>
+        <li v-for="(re, idx) in regions" :key="idx" @click="setRegion(re)">{{ re }}</li>
       </ul>
     </div>
   </div>
@@ -22,12 +22,13 @@
 /* eslint-disable */
 import { onMounted, onUnmounted, reactive, Ref, ref } from 'vue';
 import { useCommonsStore } from '@/stores/commons'
+import _ from 'lodash'
 
 // stores
 const commonsStore = useCommonsStore()
 
 // props & emits
-const emit = defineEmits(['search'])
+const emit = defineEmits(['search', 'region'])
 
 // select box toggle
 const isSelectOpened: Ref<boolean> = ref(false)
@@ -41,35 +42,26 @@ const searchKeyword : Ref<string> = ref('')
 
 document.addEventListener('keyup', (e:any) => {
   if (e.code === 'Enter') {
-    commonsStore.getCountryItems('/name', searchKeyword.value)
+    emit('search')
+    //commonsStore.getCountryItems('/name', searchKeyword.value)
   }
 })
 
 // filter by region
+let filtered : Array<any> = reactive([])
+const regions : Array<string> = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
 const region : Ref<string> = ref('')
-const regions : Array<string> = reactive([])
 
-const setRegionList = (re:string):void => {
+const setRegion = (re:string):void => {
   region.value = re
   isSelectOpened.value = false
+  commonsStore.filteredList = _.cloneDeep(commonsStore.countryList).filter((c:any) => c.region === re)
 }
-
-const setRegionSelectItems = () => {
-  commonsStore.countryList.forEach((country: any) => {
-    if (!regions.includes(country.region)) {
-      console.log('hey~')
-      regions.push(country.region)
-    }
-  })
-}
-
-defineExpose({
-  searchKeyword, region
-})
 
 // click outside of select area -> close
 
 const select: Ref<any> = ref(null)
+
 const documentClick = (e:any):void => {
   let el = select.value
   let target = e.target
@@ -78,10 +70,8 @@ const documentClick = (e:any):void => {
   }
 }
 
-
 // lifeCycle
 onMounted(()=>{
-  setRegionSelectItems()
   document.addEventListener('click', documentClick)
 })
 

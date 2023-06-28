@@ -8,7 +8,9 @@
       </div>
 
       <div class="list">
-        <div v-for="country in commonsStore.countryList" :key="country.name" class="card">
+        <div v-for="country in (commonsStore.filteredList.length!==0 ? commonsStore.filteredList : commonsStore.countryList)" 
+          :key="country.name" 
+          class="card">
           <country-card 
             :flag="country.flags.png"
             :name="country.name.common"

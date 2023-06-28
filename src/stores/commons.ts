@@ -5,17 +5,15 @@ import { defineStore } from 'pinia'
 
 export const useCommonsStore = defineStore('commonsStore', {
   state: () => ({
-    data: require('@/assets/data/data.json'),
-    filterType: '' as string,
     countryList: [] as Array<any>,
+    filteredList: [] as Array<any> // list filtered by region
   }),
   actions: { 
     getCountryItems(url?:string, params?:any) {
       getRestCountries(url, params)
         .then((res)=>{
           this.countryList = res.data
-          this.filterType = 'search'
-        })      
+        })
     },
   }
 })
