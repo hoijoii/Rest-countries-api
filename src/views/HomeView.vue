@@ -2,23 +2,32 @@
   <div id="container" class="home">
     <div class="content">
       <div class="filters">
-        <search-filter 
-          ref="filterRef"
+        <search-bar 
+          @search="setListByFilter"
+          ref="searchRef"
+        />
+        <region-select 
+          @select="setListByFilter"
+          ref="regionRef"
         />
       </div>
 
-      <div class="list">
-        <div v-for="country in (commonsStore.filteredList.length!==0 ? commonsStore.filteredList : commonsStore.countryList)" 
+      <div class="list" v-if="exData">
+        <div v-for="country in (filteredList.length !== 0 ? filteredList : countryList)" 
           :key="country.name" 
           class="card">
           <country-card 
             :flag="country.flags.png"
-            :name="country.name.common"
-            :capital="country.capital ? country.capital[0] : ''"
+            :name="country.name"
+            :capital="country.capital ? country.capital : ''"
             :region="country.region"
             :population="country.population"
           />
         </div>
+      </div>
+
+      <div class="list" v-else-if="!exData">
+        <div class="no-results">Sorry, no data match the given condition.</div>
       </div>
       
     </div>
@@ -29,31 +38,37 @@
 /* eslint-disable */
 import { onMounted, reactive, Ref, ref, computed, onBeforeMount } from 'vue';
 import CountryCard from '@/components/CountryCard.vue';
-import SearchFilter from '@/components/SearchFilter.vue'
+import SearchBar from '@/components/SearchBar.vue'
+import RegionSelect from '@/components/RegionSelect.vue';
 import { useCommonsStore } from '@/stores/commons'
 import _ from 'lodash'
-import { getRestCountries } from '@/utils/rest-utils';
 
 // stores
 const commonsStore = useCommonsStore()
 
 // props&emits
-const filterRef : Ref<any> = ref(null)
+const searchRef : Ref<any> = ref(null)
+const regionRef : Ref<any> = ref(null)
 
-// region
-/* const setRegion = (re:string):void => {
-  setCountryListByRegion(re)
+// init list
+const countryList = require('@/assets/data/data.json')
+let filteredList: Ref<Array<any>> = ref([])
+
+// filtering list
+const region = computed(() => regionRef.value?.region)
+const keyword = computed(()=> searchRef.value?.searchKeyword)
+const exData : Ref<boolean> = ref(true)
+
+const setListByFilter = () => {
+  filteredList.value = _.cloneDeep(countryList)
+                          .filter((country:any)=> country.name.toLowerCase().includes(keyword.value.toLowerCase()))
+                          .filter((country:any)=> region.value ? (country.region === region.value) : true)
+
+  filteredList.value.length === 0 ? exData.value = false : exData.value = true
 }
-
-const setCountryListByRegion = (region?:string):void => {
-  region ? 
-    countryList = commonsStore.data.filter((country:any) => country.region === region)
-    : countryList = commonsStore.data
-} */
 
 // lifecycle
 onMounted(()=>{
-  commonsStore.getCountryItems('/all')
 })
 
 </script>

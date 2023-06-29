@@ -104,51 +104,58 @@ nav {
       outline: none;
     }
   }  
+  
+}
 
-  .region {
-    margin-left: auto;
-    font-weight: 600;
-    width: 165px;
-    
-    //prevent drag
-    -ms-user-select: none;
-    -moz-user-select: -moz-none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    user-select: none;
+/* ============================================================================= 
 
-    .slct {
-      background-color: white;
-      padding: 11px 19px; 
-      cursor: pointer;
-      display: flex;
-      align-items: center;
+                                    RegionSelect
 
-      ion-icon {
-        margin-left: auto;
-      }
-    }
+============================================================================= */
 
-    ul {
-      background-color: white;
-      position: absolute;
-      width: 165px;
-      margin-top: 10px;
-      box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
-      border-radius: 5px;
-    }
-    
-    li {
-      padding: 8px 20px;
-      cursor: pointer;
-      font-size: 13px;
 
-      &:hover {
-        background-color: rgba(0,0,0,0.1);
-      }
+.region {
+  margin-left: auto;
+  font-weight: 600;
+  width: 165px;
+  
+  //prevent drag
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+
+  .slct {
+    background-color: white;
+    padding: 11px 19px; 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    ion-icon {
+      margin-left: auto;
     }
   }
+
+  ul {
+    background-color: white;
+    position: absolute;
+    width: 165px;
+    margin-top: 10px;
+    box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+    border-radius: 5px;
+  }
   
+  li {
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 13px;
+
+    &:hover {
+      background-color: rgba(0,0,0,0.1);
+    }
+  }
 }
 
 /* ============================================================================= 
