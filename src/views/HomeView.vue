@@ -22,6 +22,7 @@
             :capital="country.capital ? country.capital : ''"
             :region="country.region"
             :population="country.population"
+            @click = "goPath(country.name)"
           />
         </div>
       </div>
@@ -37,6 +38,7 @@
 <script lang="ts" setup>
 /* eslint-disable */
 import { onMounted, reactive, Ref, ref, computed, onBeforeMount } from 'vue';
+import { useRouter } from 'vue-router'
 import CountryCard from '@/components/CountryCard.vue';
 import SearchBar from '@/components/SearchBar.vue'
 import RegionSelect from '@/components/RegionSelect.vue';
@@ -55,16 +57,22 @@ const countryList = require('@/assets/data/data.json')
 let filteredList: Ref<Array<any>> = ref([])
 
 // filtering list
-const region = computed(() => regionRef.value?.region)
+const region = computed<Ref<string>>(() => regionRef.value?.region)
 const keyword = computed(()=> searchRef.value?.searchKeyword)
 const exData : Ref<boolean> = ref(true)
 
-const setListByFilter = () => {
+const setListByFilter = ():void => {
   filteredList.value = _.cloneDeep(countryList)
                           .filter((country:any)=> country.name.toLowerCase().includes(keyword.value.toLowerCase()))
                           .filter((country:any)=> region.value ? (country.region === region.value) : true)
 
   filteredList.value.length === 0 ? exData.value = false : exData.value = true
+}
+
+// router
+const router = useRouter()
+const goPath = (name: string): void => {
+  router.push(`/detail/${name}`)
 }
 
 // lifecycle
