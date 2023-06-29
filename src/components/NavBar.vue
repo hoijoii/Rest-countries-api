@@ -2,7 +2,7 @@
   <div id="navbar">
     <div class="container">
       <div class="wrapper">
-        <div class="title">Where in the world?</div>
+        <div class="title" @click="goHome">Where in the world?</div>
         <div class="mode" @click="setMode">
           <ion-icon name="moon-outline" v-if="modeName === 'Dark'"/>
           <ion-icon name="sunny-outline" v-if="modeName === 'Light'" />
@@ -15,7 +15,9 @@
 
 <script setup lang='ts'>
 import { onMounted, ref, Ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+// dark/light mode
 const modeName : Ref<string> = ref('Dark')
 
 const setMode = () => {
@@ -29,6 +31,13 @@ const setMode = () => {
   }
 }
 
+// router
+const router = useRouter()
+const goHome = () => {
+  router.push('/')
+}
+
+// lifeCycle
 onMounted(()=>{
   localStorage.setItem('mode', 'light')
 })
