@@ -19,7 +19,7 @@ html, body {
 }
 
 #container {
-  width: 67vw;
+  width: 75vw;
   position: absolute;
   top: 100px;
   left: 50%;
@@ -52,7 +52,7 @@ nav {
   justify-content: center;
 
   .container {
-    width: 67vw;
+    width: 75vw;
   }
 
   .wrapper {
@@ -166,10 +166,6 @@ nav {
 
 ============================================================================= */
 
-.home {
-
-  
-}
 
 .list {
   margin-top: 40px;
@@ -206,8 +202,10 @@ nav {
 ============================================================================= */
 
 #card {
-  width: 220px;
-  height: 310px;
+  width: 15.27vw;
+  min-width: 220px;
+  height: 22.91vw;
+  min-height: 310px;
 
   background-color: white;
   border-radius: 5px;
@@ -218,31 +216,34 @@ nav {
 
   img {
     object-fit: cover;
-    width: 220px;
-    height: 150px;
+    //width: max(220px, 15.27vw);
+    width: 100%;
+    height: 45.5%;
+    min-height: 150px;
     border-radius: 5px 5px 0px 0px;
   }
 
   
   .info {
     //padding: max(1vw, 30px);
-    
     display: flex;
     align-items: center;
-    height: 150px;
-    padding: 0px 30px;
+    min-height: 150px;
+    height: 50%;
+    padding: 0px 2.08vw;
     
     .title{
       font-weight: 800;
-      font-size: 15px;
+      font-size: max(15px, 1.04vw);
     }
 
     .description {
-      margin-top: 10px;
-      font-size: 13px;
+      margin-top: 6.66%;
+      font-size: max(13px, 0.9vw);
+      line-height: max(18px, 1.5vw);
 
       span {
-        font-weight: 600;
+        font-weight: 600; 
       }
     }
   }
