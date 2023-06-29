@@ -19,9 +19,9 @@ html, body {
 }
 
 #container {
-  width: 67vw;
+  width: 75vw;
   position: absolute;
-  top: 100px;
+  top: max(90px, 9vw);
   left: 50%;
   transform: translateX(-50%);
 
@@ -39,8 +39,9 @@ nav {
   background-color: white;
   position: fixed;
   width: 100%;
-  height: 65px;
-  line-height: 65px;
+  height: 5vw;
+  min-height: 65px;
+  line-height: max(65px, 5vw);
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 }
 
@@ -51,7 +52,7 @@ nav {
   justify-content: center;
 
   .container {
-    width: 67vw;
+    width: 75vw;
   }
 
   .wrapper {
@@ -61,7 +62,7 @@ nav {
 
   .title {
     font-weight: 800;
-    font-size: 16px;
+    font-size: max(16px, 1.1vw);
     cursor: pointer;
   }
 
@@ -72,41 +73,43 @@ nav {
     align-items: center;
     cursor: pointer;
     font-weight: 600;
-    font-size: 13px;
+    font-size: max(13px, 1.8vh);
   }
 }
 
 /* ============================================================================= 
 
-                                    SearchFilter
+                                    SearchBox
 
 ============================================================================= */
 
-.filter {
-  display: flex;
+.search-box {
+  position: relative; 
+  width: 25vw;
+  height: 2.2vw;
+  min-height: 39.6px;
 
-  .search-box {
-    position: relative; 
-    ion-icon {
-      position: absolute;
-      font-size: 15px;
-      color: gray;
-      top: 13px;
-      left: 15px;
-    }
-  }
-
-  .search {
+  ion-icon {
     position: absolute;
-    padding: 11px 40px;
-    width: 25vw;
-    
-    &:focus {
-      outline: none;
-    }
-  }  
-  
+    font-size: 1.1em;
+    color: gray;
+    top: 0.8em;
+    left: 1em;
+  }
 }
+
+.search {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 11px 40px;
+  box-sizing: border-box;
+  font-size: 100px;
+  
+  &:focus {
+    outline: none;
+  }
+}  
 
 /* ============================================================================= 
 
@@ -129,10 +132,14 @@ nav {
 
   .slct {
     background-color: white;
-    padding: 11px 19px; 
+    padding: 11px 19px;
+    box-sizing: border-box;
     cursor: pointer;
     display: flex;
     align-items: center;
+    height: 2.2vw;
+    min-height: 39.6px;
+    font-size: max(13px, 1em);
 
     ion-icon {
       margin-left: auto;
@@ -165,9 +172,8 @@ nav {
 
 ============================================================================= */
 
-.home {
-
-  
+.filters {
+  display: flex;
 }
 
 .list {
@@ -205,8 +211,10 @@ nav {
 ============================================================================= */
 
 #card {
-  width: 220px;
-  height: 310px;
+  width: 15.27vw;
+  min-width: 220px;
+  height: 22.91vw;
+  min-height: 310px;
 
   background-color: white;
   border-radius: 5px;
@@ -217,31 +225,34 @@ nav {
 
   img {
     object-fit: cover;
-    width: 220px;
-    height: 150px;
+    //width: max(220px, 15.27vw);
+    width: 100%;
+    height: 45.5%;
+    min-height: 150px;
     border-radius: 5px 5px 0px 0px;
   }
 
   
   .info {
     //padding: max(1vw, 30px);
-    
     display: flex;
     align-items: center;
-    height: 150px;
-    padding: 0px 30px;
+    min-height: 150px;
+    height: 50%;
+    padding: 0px 2.08vw;
     
     .title{
       font-weight: 800;
-      font-size: 15px;
+      font-size: max(15px, 1.04vw);
     }
 
     .description {
-      margin-top: 10px;
-      font-size: 13px;
+      margin-top: 6.66%;
+      font-size: max(13px, 0.9vw);
+      line-height: max(18px, 1.5vw);
 
       span {
-        font-weight: 600;
+        font-weight: 600; 
       }
     }
   }

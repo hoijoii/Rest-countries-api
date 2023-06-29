@@ -1,9 +1,7 @@
 <template>
-  <div class="filter">
-    <div class="search-box">
-      <input type="text" v-model="searchKeyword" class="search filter-design" placeholder="Search for a country..."/>
-      <ion-icon name="search" />
-    </div>
+  <div class="search-box">
+    <input type="text" v-model="searchKeyword" class="search filter-design" placeholder="Search for a country..."/>
+    <ion-icon name="search" />
   </div>
 </template>
 
