@@ -6,12 +6,13 @@ import axios from 'axios'
   }
 } */
 const config = {
-  baseUrl: "https://restcountries.com/v3.1"
+  baseUrl: "https://restcountries.com/v3.1",
+  field: "?fields=name,capital,tld,currencies,region,subregion,population,languages,flags,borders"
 }
 
 const getRestCountries = (url?:string, params?: any) => {
-  console.log(config.baseUrl + (url ? url : '') + (params ? '/' + params : ''))
-  return axios.get(config.baseUrl + (url ? url : '') + (params ? '/' + params : ''))
+  console.log(config.baseUrl + (url ? url : '') + (params ? '/' + params : '')+config.field)
+  return axios.get(config.baseUrl + (url ? url : '') + (params ? '/' + params : '')+config.field)
 }
 
 export {

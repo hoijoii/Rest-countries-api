@@ -18,11 +18,11 @@
           class="card">
           <country-card 
             :flag="country.flags.png"
-            :name="country.name"
-            :capital="country.capital ? country.capital : ''"
+            :name="country.name.common"
+            :capital="country.capital ? country.capital[0] : ''"
             :region="country.region"
             :population="country.population"
-            @click = "goPath(country.name)"
+            @click = "goPath(country.name.common)"
           />
         </div>
       </div>
@@ -44,6 +44,8 @@ import SearchBar from '@/components/SearchBar.vue'
 import RegionSelect from '@/components/RegionSelect.vue';
 import { useCommonsStore } from '@/stores/commons'
 import _ from 'lodash'
+import { getRestCountries } from '@/utils/rest-utils';
+import { ICountry } from '@/types/country'
 
 // stores
 const commonsStore = useCommonsStore()
@@ -53,18 +55,26 @@ const searchRef : Ref<any> = ref(null)
 const regionRef : Ref<any> = ref(null)
 
 // init list
-const countryList = require('@/assets/data/data.json')
-let filteredList: Ref<Array<any>> = ref([])
+const countryList : Ref<Array<ICountry>> = ref([])
+let filteredList: Ref<Array<ICountry>> = ref([])
+
+const init = async() => {
+  await getRestCountries('/all')
+    .then((res:any)=>{
+      console.log(res.data)
+      countryList.value = res.data
+    })
+}
 
 // filtering list
-const region = computed<Ref<string>>(() => regionRef.value?.region)
+const region = computed<string>(() => regionRef.value?.region.value)
 const keyword = computed(()=> searchRef.value?.searchKeyword)
 const exData : Ref<boolean> = ref(true)
 
 const setListByFilter = ():void => {
-  filteredList.value = _.cloneDeep(countryList)
-                          .filter((country:any)=> country.name.toLowerCase().includes(keyword.value.toLowerCase()))
-                          .filter((country:any)=> region.value ? (country.region === region.value) : true)
+  filteredList.value = _.cloneDeep(countryList.value)
+                          .filter((country:ICountry)=> country.name.toLowerCase().includes(keyword.value.toLowerCase()))
+                          .filter((country:ICountry)=> region.value ? (country.region === region.value) : true)
 
   filteredList.value.length === 0 ? exData.value = false : exData.value = true
 }
@@ -73,10 +83,13 @@ const setListByFilter = ():void => {
 const router = useRouter()
 const goPath = (name: string): void => {
   router.push(`/detail/${name}`)
+  commonsStore.getCountryDetail(name)
 }
 
 // lifecycle
 onMounted(()=>{
+  init()
+  //commonsStore.getCountryList()
 })
 
 </script>
