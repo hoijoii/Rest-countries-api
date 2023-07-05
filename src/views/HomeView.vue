@@ -13,12 +13,12 @@
       </div>
 
       <div class="list" v-if="exData">
-        <div v-for="country in (filteredList.length !== 0 ? filteredList : countryList)" 
+        <div v-for="country in (filteredList.length !== 0 ? filteredList : commonsStore.countryList)" 
           :key="country.name" 
           class="card">
           <country-card 
-            :flag="country.flags.png"
-            :name="country.name.common"
+            :flag="country.flags?.png"
+            :name="country.name?.common"
             :capital="country.capital ? country.capital[0] : ''"
             :region="country.region"
             :population="country.population"
@@ -55,24 +55,18 @@ const searchRef : Ref<any> = ref(null)
 const regionRef : Ref<any> = ref(null)
 
 // init list
-const countryList : Ref<Array<ICountry>> = ref([])
-let filteredList: Ref<Array<ICountry>> = ref([])
-
 const init = async() => {
-  await getRestCountries('/all')
-    .then((res:any)=>{
-      console.log(res.data)
-      countryList.value = res.data
-    })
+  await commonsStore.getCountryList()
 }
 
 // filtering list
+let filteredList: Ref<Array<ICountry>> = ref([])
 const region = computed<string>(() => regionRef.value?.region.value)
 const keyword = computed(()=> searchRef.value?.searchKeyword)
 const exData : Ref<boolean> = ref(true)
 
 const setListByFilter = ():void => {
-  filteredList.value = _.cloneDeep(countryList.value)
+  filteredList.value = _.cloneDeep(commonsStore.countryList)
                           .filter((country:ICountry)=> country.name.toLowerCase().includes(keyword.value.toLowerCase()))
                           .filter((country:ICountry)=> region.value ? (country.region === region.value) : true)
 
@@ -87,9 +81,8 @@ const goPath = (name: string): void => {
 }
 
 // lifecycle
-onMounted(()=>{
-  init()
-  //commonsStore.getCountryList()
+onMounted(async()=>{
+  await init()
 })
 
 </script>
