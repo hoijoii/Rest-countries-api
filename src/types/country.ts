@@ -1,14 +1,15 @@
 export declare interface ICountry {
   name: IName,
   flags: Object
-  capital: Array<string>
+  capital: string[]
   population: number
   region: string
   subregion: string
-  tld: Array<string>
+  tld: string[]
   languages: Object
   currencies: Object
-  borders: Array<string>
+  borders: string[]
+  cca3: string
 }
 
 export declare interface IName {

@@ -7,7 +7,7 @@ import axios from 'axios'
 } */
 const config = {
   baseUrl: "https://restcountries.com/v3.1",
-  field: "?fields=name,capital,tld,currencies,region,subregion,population,languages,flags,borders"
+  field: "?fields=cca3,name,capital,tld,currencies,region,subregion,population,languages,flags,borders"
 }
 
 const getRestCountries = (url?:string, params?: any) => {
